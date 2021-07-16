@@ -1,0 +1,35 @@
+.column {
+    width: 20%;
+}
+
+.column__header {
+   
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+    color: #fff;
+}
+
+.column__add {
+    background-color: #292b31;
+    padding: 10px;
+}
+.column__add-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    opacity: .5;
+    position: relative;
+    padding-left: 30px;
+}
+
+.column__add-btn::before {
+    content: '+';
+    position: absolute;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    left: 5px;
+}
+

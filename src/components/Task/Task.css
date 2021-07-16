@@ -1,0 +1,25 @@
+.task {
+    padding: 12px 8px;
+    background-color:#000000d4;
+    color:rgba(255, 255, 255, 0.5);
+    margin-top: 10px;
+}
+.task__header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.task__title {
+    margin-bottom: 8px;
+}
+
+.task__btn-delete {
+    color:rgba(255, 255, 255, 0.5);
+}
+
+.task__title  span   {
+    color: rgba(255, 255, 255, 1);
+    font-weight: bold;
+   
+    
+}

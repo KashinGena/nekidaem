@@ -1,5 +1,8 @@
 .column {
     width: 20%;
+    /* height: auto; */
+    background-color: #292b31;
+    
 }
 
 .column__header {
@@ -10,8 +13,11 @@
     color: #fff;
 }
 
+.column__inner {
+    padding: 5px;
+}
 .column__add {
-    background-color: #292b31;
+    
     padding: 10px;
 }
 .column__add-btn {

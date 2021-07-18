@@ -1,0 +1,37 @@
+@import '../../styles/_variables';
+
+
+.column {
+    width: 20%;
+    background-color: #292b31;
+    background-color: darken( #33363d,5);
+    &__header {
+        padding: $padding;
+        text-align: left;
+        font-weight: bold;
+        color: #fff;
+    }
+    &__inner {
+        padding: $padding;
+    } 
+    &__add {
+        padding: $padding;
+        &-btn {
+             @extend %button;
+             position: relative;
+            padding-left: 25px;
+            &::before {
+                content: '+';
+                position: absolute;
+                margin-right: 10px;
+                width: 20px;
+                height: 20px;
+                left: 0px;
+            }
+        }
+    }
+
+
+}
+
+

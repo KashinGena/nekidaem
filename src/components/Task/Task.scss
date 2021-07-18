@@ -1,0 +1,30 @@
+@import '../../styles/_variables';
+
+
+.task {
+    padding: 12px 8px;
+    background-color:#000000d4;
+    color:$main-color;
+    margin-top: 10px;
+    cursor: move;
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+    }
+    &__title {
+        margin-bottom: 8px;
+        & span {
+            color: rgba(255, 255, 255, 1);
+            font-weight: bold; 
+        }
+    }
+    &__btn-delete {
+        color:$main-color;
+        cursor: pointer;
+    }
+}
+
+
+
+
+

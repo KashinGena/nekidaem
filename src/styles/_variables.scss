@@ -1,0 +1,14 @@
+$main-color:rgba(255, 255, 255, 0.5);
+$padding:8px;
+
+
+%button {
+    background-color: transparent;
+    // border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.5);
+    // opacity: .5;
+    padding: 8px 25px 8px 25px;
+    cursor: pointer;
+  }
+

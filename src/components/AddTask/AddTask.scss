@@ -1,0 +1,31 @@
+@import '/src/styles/_variables';
+
+.add-task {
+    padding: $padding;
+    
+    &__text {
+        background-color: darkgrey;
+         color:#fff;
+        width: 100%;
+        padding-bottom: 30px;
+        &::placeholder {
+            color: #fff;
+        }
+        
+    }
+    &__add-btn {
+        @extend %button;
+        background-color: $main-color;
+        color: #fff;
+        margin-top: 8px;
+    }
+
+    &__cancel-btn {
+        background-color: darkgrey;
+       margin-left: 10px;
+       margin-top: 8px;
+        color: #fff;
+        padding: $padding;
+       
+    }
+}

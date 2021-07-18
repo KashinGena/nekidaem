@@ -1,10 +1,11 @@
 import React from 'react'
-import './Column.css'
+import './Column.scss'
 import Task from '../Task/Task'
+import AddTask from '../AddTask/AddTask';
 
 
 const Column = ({color, title, tasks}) => {
-    console.log(tasks);
+    const [isAddMode,setAddMode]=React.useState(false);
     
     return (
         <div className="column">
@@ -18,10 +19,12 @@ const Column = ({color, title, tasks}) => {
            
             :null}
             </div>
-           
+            {isAddMode? <AddTask onCancelClick={() =>{console.log(isAddMode);
+             setAddMode(false)}}/>:
             <div className="column__add">
-                <button className="column__add-btn">Добавить карточку</button>
+                <button onClick={() => setAddMode(true)} className="column__add-btn">Добавить карточку</button>
             </div>
+            }
         </div>
     )
 }

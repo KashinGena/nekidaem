@@ -1,12 +1,18 @@
-.app {
-  
+@import './_reset';
+
+body {
+  background-color: #33363d;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 .container {
   max-width: 1162px;
   margin: 0 auto;
   padding: 0 20px;
 }
-
 .app__inner {
   display: flex;
   justify-content: space-between;
@@ -14,3 +20,4 @@
   padding-top: 40px;
   
 }
+

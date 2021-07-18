@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import Column from './components/Column/Column';
+
+import './styles/App.scss';
+import Column from './components/Column/Column'
 
  const tasks ={
    'ON_HOLD':[{id:0,text:"adsfsdf"},{id:0,text:"adsfsdf"}],

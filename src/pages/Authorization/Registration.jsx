@@ -2,11 +2,11 @@ import React from 'react'
 import './Authorization.scss'
 import {useDispatch} from 'react-redux'
 import {auth} from '../../redux/actions/auth'
-import { NavLink,Redirect } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 
 
 
-const Registration = ({isAuth}) => {
+const Registration = () => {
     
     
     const [name,setName] = React.useState('')

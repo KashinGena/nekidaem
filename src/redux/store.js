@@ -1,9 +1,11 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import authReducer from './reducers/auth'
+import cardsReducer from './reducers/card'
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
-    authReducer
+    authReducer,
+    cardsReducer
 })
 
 const composeEnhancers =

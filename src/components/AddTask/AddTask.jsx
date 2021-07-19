@@ -3,11 +3,20 @@ import './AddTask.scss'
 
 
 const AddTask = ({onCancelClick, onAddClick}) => {
+    const [value, setValue] =React.useState('')
+    const onClick = () => {
+        
+        
+        onAddClick(value)
+    }
     return (
         <div className='add-task'>
-            <textarea className='add-task__text' placeholder="Ввести заголовок для этой карточки"></textarea>
+            <textarea className='add-task__text'
+                      placeholder="Ввести заголовок для этой карточки"
+                      value={value}
+                      onChange={(e)=>setValue(e.target.value)}></textarea>
             <button className='add-task__add-btn'
-                    onClick={onAddClick}
+                    onClick={onClick}
             >
                 Добавить карточку
             </button>

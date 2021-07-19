@@ -9,6 +9,7 @@ const initialState =  {
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'AUTH_SUCCESS':
+
             return {
                 ...state,
                 token:action.token,
@@ -29,6 +30,15 @@ const authReducer = (state = initialState, action) => {
                 token:'',
                 userName:''
             }
+        case 'AUTO_AUTH_SUCCESS':
+            return {
+                ...state,
+                isAuth:true,
+                token:action.token,
+                userName:action.userName,
+                password:action.password
+            }
+
 
         default:
             return state

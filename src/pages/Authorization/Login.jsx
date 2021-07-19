@@ -2,13 +2,13 @@ import React from 'react'
 import './Authorization.scss'
 import {useDispatch} from 'react-redux'
 import {auth} from '../../redux/actions/auth'
-import { NavLink, Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
-const Login = (isAuth) => {
-    console.log(isAuth);
+const Login = () => {
     
-    if (isAuth) <Redirect to ='/'/>
+    
+ 
     const [name,setName] = React.useState('')
     const [password,setPassword] = React.useState('')
     const dispatch = useDispatch()

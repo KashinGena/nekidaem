@@ -20,12 +20,14 @@ export const createCard = (card, token) => {
     const config = {
         headers: { Authorization: `JWT ${token.token}` }
     };
-    console.log(config);
+
     
     return async dispatch => {
         try {
             const response = await axios.post('https://trello.backend.tests.nekidaem.ru/api/v1/cards/',card,config)
             const data= response.data
+            console.log(data);
+            
             dispatch(cardCreated(data))
             
         }
@@ -36,11 +38,49 @@ export const createCard = (card, token) => {
 }
 
 const cardCreated = (card) => {
-    console.log(card);
+
     
     return {
         type:'CARD_CREATED',
         payload:card
+    }
+}
+export const update  = (id,destination,token) => {
+    const config = {
+        headers: { Authorization: `JWT ${token.token}` }
+    };
+    return async (dispatch,getState) => {
+         const card =getState().cardsReducer.cards[id]
+      
+        
+        const reqObj = {
+           'row':destination.droppableId,
+           'seq_num':destination.index,
+           'text':card.text
+        }
+        
+        try {
+            dispatch(updateCardSuccess(id,destination))
+            await axios.patch(`https://trello.backend.tests.nekidaem.ru/api/v1/cards/${id}/`,reqObj,config)
+            
+            
+        }
+        catch(e) {
+
+        }
+    }
+}
+
+
+
+
+ const updateCardSuccess = (id,destination) => {
+     console.log('upd');
+     
+    return {
+        type:'UPDATE_CARD',
+        id,
+        destination
     }
 }
 

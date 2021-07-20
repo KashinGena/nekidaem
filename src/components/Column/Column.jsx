@@ -2,10 +2,17 @@ import React from 'react'
 import './Column.scss'
 import Task from '../Task/Task'
 import AddTask from '../AddTask/AddTask';
+import { Droppable } from 'react-beautiful-dnd';
+import TaskList from '../TaskList/TaskList';
+import { useSelector } from 'react-redux';
 
 
 const Column = ({id,color, title, tasks, onAddClickl,onDeleteTask}) => {
     const [isAddMode,setAddMode]=React.useState(false) 
+    const cards = useSelector( state => state.cardsReducer.cards)
+    
+    
+
 
     const onAddClick = (f) => {
         const resp = {
@@ -17,14 +24,28 @@ const Column = ({id,color, title, tasks, onAddClickl,onDeleteTask}) => {
    }
 
     return (
+        
         <div className="column">
             <div className='column__header' style={{backgroundColor:color}}>
-                {title}
+               {title} ({tasks.length})  
             </div>
             <div className="column__inner">
-            {tasks.length!==0 && tasks.map(task => 
-                 <Task key={task.id} id={task.id} text={task.text} onDelete={onDeleteTask.bind(null,task.id)}/>
-            )}
+            <Droppable droppableId={id.toString()}>
+                {(provided) => (
+                    <TaskList
+                     innerRef={provided.innerRef}
+                    {...provided.droppableProps}
+                    >
+                        {tasks.length!==0 && tasks.map((id,index) => {
+                          return (cards[id])? <Task key={id} index={cards[id].seq_num} id={id} text={cards[id].text} onDelete={onDeleteTask.bind(null,id)}/>
+                          :null
+})}
+                        {provided.placeholder}
+                    </TaskList>
+                )
+                }
+                
+            </Droppable>
             </div>
             {isAddMode? <AddTask onCancelClick={() => setAddMode(false)}
                                  onAddClick={onAddClick}/>:
@@ -33,6 +54,7 @@ const Column = ({id,color, title, tasks, onAddClickl,onDeleteTask}) => {
             </div>
             }
         </div>
+        
     )
 }
 

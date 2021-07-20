@@ -26,7 +26,7 @@ React.useEffect(() => {
       <Header isAuth={isAuth}/>
       <Switch>
         <Route exact path = "/">
-          <Board/>
+        {!isAuth? <Redirect to='/register'/> :<Board/>}
         </Route>
         <Route path ='/login'>
           {isAuth? <Redirect to='/'/> :<Login/>}

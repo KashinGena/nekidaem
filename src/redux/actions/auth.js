@@ -73,8 +73,7 @@ export const autoAuth = () => {
         try {
             const response = await axios.post(url,requestObj)
             if (response.status===200) {
-                console.log(response);
-                
+               
                 const data = response.data
                 dispatch(autoAuthSuccess(data))
               

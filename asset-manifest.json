@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/nekidaem/static/css/main.f23b672b.chunk.css",
+    "main.js": "/nekidaem/static/js/main.c218b803.chunk.js",
+    "main.js.map": "/nekidaem/static/js/main.c218b803.chunk.js.map",
+    "runtime-main.js": "/nekidaem/static/js/runtime-main.b16d9da5.js",
+    "runtime-main.js.map": "/nekidaem/static/js/runtime-main.b16d9da5.js.map",
+    "static/js/2.1d396997.chunk.js": "/nekidaem/static/js/2.1d396997.chunk.js",
+    "static/js/2.1d396997.chunk.js.map": "/nekidaem/static/js/2.1d396997.chunk.js.map",
+    "static/js/3.e63ddb1f.chunk.js": "/nekidaem/static/js/3.e63ddb1f.chunk.js",
+    "static/js/3.e63ddb1f.chunk.js.map": "/nekidaem/static/js/3.e63ddb1f.chunk.js.map",
+    "index.html": "/nekidaem/index.html",
+    "static/css/main.f23b672b.chunk.css.map": "/nekidaem/static/css/main.f23b672b.chunk.css.map",
+    "static/js/2.1d396997.chunk.js.LICENSE.txt": "/nekidaem/static/js/2.1d396997.chunk.js.LICENSE.txt",
+    "static/media/trello.0d980286.png": "/nekidaem/static/media/trello.0d980286.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b16d9da5.js",
+    "static/js/2.1d396997.chunk.js",
+    "static/css/main.f23b672b.chunk.css",
+    "static/js/main.c218b803.chunk.js"
+  ]
+}

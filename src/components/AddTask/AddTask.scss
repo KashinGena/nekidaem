@@ -1,23 +1,30 @@
 @import '/src/styles/_variables';
 
 .add-task {
-    padding: $padding;
+      padding: $padding;
     
     &__text {
         background-color: darkgrey;
-         color:#fff;
+        color:#fff;
         width: 100%;
         padding-bottom: 30px;
+        resize: none;
         &::placeholder {
             color: #fff;
+            padding-left: 10px;
         }
         
+    }
+    &__btn-container {
+        display: flex;
+        justify-content: space-between;
     }
     &__add-btn {
         @extend %button;
         background-color: $main-color;
         color: #fff;
         margin-top: 8px;
+      
     }
 
     &__cancel-btn {
@@ -27,5 +34,23 @@
         color: #fff;
         padding: $padding;
        
+    }
+    @media (max-width:768px) {
+        padding: 30px;
+           
+            &__text {
+                font-size: $font-size-mobile;
+                margin-bottom: 20px;
+                &::placeholder {
+                    font-size: $font-size-mobile;
+                }
+            }
+            &__add-btn {
+                font-size: $font-size-mobile;
+            }
+            &__cancel-btn {
+                padding: 15px;
+            }
+        
     }
 }

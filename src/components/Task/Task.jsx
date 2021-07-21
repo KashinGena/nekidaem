@@ -1,14 +1,13 @@
 import React from 'react'
 import './Task.scss'
 import { Draggable } from 'react-beautiful-dnd'
+import { useSelector } from 'react-redux';
 
 const Task = ({id, text,index, onDelete,...props}) => {
-    console.log('id',id,'index',index);
+  const card = useSelector( state => state.cardsReducer.cards[id])
     
     return (
         <Draggable draggableId={id.toString()} index={index}>
-            
-            
             {(provided)=>(
                 <div 
                     {...provided.draggableProps}
@@ -19,7 +18,7 @@ const Task = ({id, text,index, onDelete,...props}) => {
                             <button onClick={onDelete} className='task__btn-delete'>Х</button>
                         </div>
                         <p className="task__title"><span>id</span>  {id}</p>
-                        <div className="task__test">{text}</div>
+                        <div className="task__text">{card.text}</div>
               </div>
             )}
       

@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 export const logout = () => {
@@ -32,6 +31,18 @@ export const authFailed = (error) => {
     }
 }
 
+export const tokenRefreshed = (token) => {
+    localStorage.removeItem('expData')
+    localStorage.removeItem('token')
+    const expirationData = new Date().getTime()*60*60*100
+    localStorage.setItem('expData', JSON.stringify(expirationData))
+    localStorage.setItem('token',token)
+    return {
+        type:'TOKEN_REFRESHED',
+        payload:token
+    }
+}
+
 export const auth = (authObj,isLogin) => {
     const url = (isLogin)?
         'https://trello.backend.tests.nekidaem.ru/api/v1/users/login/'
@@ -43,20 +54,20 @@ export const auth = (authObj,isLogin) => {
     return async (dispatch) => { 
         try {
             const response = await axios.post(url,requestObj)
-            // console.log(response);
-            
             if (response.status===201) {
-                // console.log(response);
-                
+  
                 const data = response.data
+                const expirationData = new Date().getTime()*60*60*100
+                localStorage.setItem('expData', JSON.stringify(expirationData))
                 localStorage.setItem('token', authObj.token)
                 localStorage.setItem('username', authObj.username)
                 localStorage.setItem('password', authObj.password)
                 dispatch(authSuccess(data.token,data.username))
+                dispatch(refreshToken(3600))
               
             } 
             else {
-                // console.log(response.data);   
+                dispatch(logout())   
             } 
         }
         catch (e) {
@@ -72,29 +83,41 @@ export const autoAuth = () => {
     const userName= localStorage.getItem('username')
     const password = localStorage.getItem('password')
     const requestObj = (userName && password) && {'username':userName,'password':password}
-    console.log(requestObj);
-    
-
     return async (dispatch) => { 
         try {
-            const response = await axios.post(url,requestObj)
+            const response =(requestObj)? await axios.post(url,requestObj):null
             if (response.status===200) {
                
                 const data = response.data
-                console.log(data);
                 const userName=localStorage.getItem('username')
                 dispatch(autoAuthSuccess(data,userName))
               
             } 
             else {
-                console.log(response.data);   
+                dispatch(logout())   
             } 
         }
         catch (e) {
-           dispatch(authFailed(e.response.data))
+            dispatch(logout())   
+        }
     }
 }
-}
 
+
+export function refreshToken(time) {
+    return  (dispatch,getState) => {
+        const token = getState().authReducer.token
+        const config = {
+            headers: { Authorization: `JWT ${token}` }
+        }
+        console.log(config);
+        
+        
+        setTimeout(() => {
+           axios.post('https://trello.backend.tests.nekidaem.ru/api/v1/users/refresh_token/',token,config)
+           .then(data => dispatch(tokenRefreshed(data)))
+        },time*1000)
+    }
+}
 
 

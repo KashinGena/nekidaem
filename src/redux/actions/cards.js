@@ -11,7 +11,7 @@ export const getCards = (token) => {
             dispatch(getCardsSuccess(data))
         }
         catch(e) {
-
+            alert(e)
         }
     }      
 }
@@ -26,13 +26,10 @@ export const createCard = (card, token) => {
         try {
             const response = await axios.post('https://trello.backend.tests.nekidaem.ru/api/v1/cards/',card,config)
             const data= response.data
-            console.log(data);
-            
-            dispatch(cardCreated(data))
-            
+            dispatch(cardCreated(data))         
         }
         catch(e) {
-
+            alert(e)
         }
     }
 }
@@ -49,8 +46,7 @@ export const update  = (id,destination,token) => {
     const config = {
         headers: { Authorization: `JWT ${token.token}` }
     };
-    console.log(config);
-    
+
     return  (dispatch,getState) => {
         
          const card =getState().cardsReducer.cards[id]
@@ -78,7 +74,7 @@ export const update  = (id,destination,token) => {
 
 
  export const updateCardSuccess = (id,source,destination) => {
-     console.log('upd');
+ 
      
     return {
         type:'UPDATE_CARD',
@@ -110,7 +106,7 @@ export const deleteCards = (id,token) => {
     return async dispatch => {
         try {
              await axios.delete(`https://trello.backend.tests.nekidaem.ru/api/v1/cards/${id}/`,config)
-            dispatch(cardDeleted(id))
+             dispatch(cardDeleted(id))
         }
         catch(e) {
 

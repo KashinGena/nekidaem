@@ -32,18 +32,11 @@ const cardsReducer = (state = initialState, action) => {
             const id = action.payload
             const cards = {...state.cards}
             const row = cards[id].row
-            console.log(row);
             delete cards[id]
             const column = {...state.columnHeader[row]}
             const task =column.task.filter(item =>item!==id)
-            console.log(task);
             task.map((item,index)=>cards[item].seq_num=index)
-            console.log(task);
-            
-            
-           
-            console.log(task);
-            
+
             return {
                 ...state,
                 cards:cards,
@@ -77,19 +70,12 @@ const cardsReducer = (state = initialState, action) => {
             const source = action.source   
             const cardsClone={...state.cards}                   
             const item = cardsClone[id]
-             
-             console.log('insideact');
-             
-             
+            //если в одном столбце
              if (destination.droppableId===source.droppableId) { 
-                 console.log('insideif');
                 const columnFrom = {...state.columnHeader[source.droppableId]}  
-                console.log(columnFrom);
                 const task = [...columnFrom.task]
                 const [col]=task.splice(source.index,1)
-                console.log(task);
                 task.splice(destination.index,0,col)
-                console.log(columnFrom);
                 columnFrom.task=task
                 return {
                     ...state,
@@ -106,20 +92,7 @@ const cardsReducer = (state = initialState, action) => {
             
             const [col]=columnFrom.task.splice(source.index,1)    
             const columnTo = {...state.columnHeader[destination.droppableId]}  
-            console.log(columnFrom.task);
-
-                 console.log(columnTo.task);
-
-                 console.log(col);
-                 
             columnTo.task.splice(destination.index,0,col)
-            console.log(columnFrom.task);
-
-            console.log(columnTo.task);
-            // columnFrom.task.map((item,index) =>cardsClone[item].seq_num=index )
-            // columnTo.task.map((item,index) =>cardsClone[item].seq_num=index )
-            console.log(columnFrom.task);
-            console.log(columnTo.task);
             item.row=destination.droppableId           
                     return {
                         ...state,
@@ -130,9 +103,6 @@ const cardsReducer = (state = initialState, action) => {
                             [destination.droppableId]:columnTo
                         }
                     }
-                
-            
-
         }
 
         default:

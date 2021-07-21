@@ -2,7 +2,8 @@ const initialState =  {
     isAuth:false,
     token:null,
     userName:'',
-    error:null
+    error:null,
+    expirationData:null
 }
 
 
@@ -15,11 +16,12 @@ const authReducer = (state = initialState, action) => {
                 token:action.token,
                 userName:action.username,
                 isAuth:true,
-                error:null
+                error:null,
+                
+
             }
+
         case 'AUTH_ERROR': 
-        console.log(action.payload);
-        
             return {
                 ...state, error:action.error
             }
@@ -28,17 +30,24 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: false,
                 token:'',
-                userName:''
+                userName:'',
+                error:null
             }
         case 'AUTO_AUTH_SUCCESS':
-            console.log(action);
             return {
                 ...state,
                 isAuth:true,
                 token:action.token,
                 userName:action.userName,
+                error:null
                
             }
+        case('TOKEN_REFRESHED'): {
+            return {
+                ...state,
+                token:action.payload
+            }
+        }
 
 
         default:

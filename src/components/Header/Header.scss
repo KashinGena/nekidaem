@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding-top: 20px;
     a {
         text-decoration: none;
     }
@@ -27,7 +27,7 @@
     &__login {
      
         &-user {
-            font-size: 28px;
+            font-size: 1.5rem;
             color: #fff;
         }
         &-auth {
@@ -39,6 +39,44 @@
 
         }
     }
+    @media (max-width:768px) {
+        
+           
+         
+            &__login {
+                align-self: flex-end;
+                width: 200px;
+                font-size: $font-size-mobile;
+                &-user {
+                    font-size: 1.2*$font-size-mobile;
+                    margin-right: 20px;
+                }
+                &-auth {
+                    font-size: $font-size-mobile
+                }
+            }
+            &__login-user
+            &__login-auth {
+                font-size: $font-size-mobile;
+            }
+    }
+    @media (max-width:650px) {
+        display: block;
+        &__logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            &__title {
+                font-size: 2*$font-size-mobile;
+            }
+        }
+        &__login-container {
+            display: flex;
+            justify-content: flex-end;
+            
+        }
+    }
+        
 }
 
 

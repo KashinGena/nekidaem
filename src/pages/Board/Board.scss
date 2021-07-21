@@ -1,0 +1,13 @@
+.board {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 40px;
+    @media (max-width:768px) {
+      flex-wrap: wrap;
+      align-items: stretch;
+  } 
+    @media (max-width:768px) {
+     
+  } 
+}

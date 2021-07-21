@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import './Board.scss'
 import Column from '../../components/Column/Column'
 import {useDispatch, useSelector} from 'react-redux'
 import {createCard, getCards, deleteCards, update, updateCardSuccess} from '../../redux/actions/cards'
@@ -7,6 +8,7 @@ import { DragDropContext } from 'react-beautiful-dnd'
 
 
 const Board = () => {
+
   const dispatch = useDispatch()
   const token = useSelector(state => state.authReducer.token)
 
@@ -14,62 +16,52 @@ const Board = () => {
   
   const columns = useSelector(state => state.cardsReducer.columns)
   const columnHeader = useSelector(state => state.cardsReducer.columnHeader)
-
  
-  
 
-    const onAddClickHandler = (e) => {
-        console.log('Board',e);
-        dispatch(createCard(e,token))  
-    }
-    const onDeleteClickHandler = (e) => {
-      console.log('Board',e);
-      dispatch(deleteCards(e,token))  
+  const onAddClickHandler = useCallback((card) => {
+      dispatch(createCard(card,token))  
+  },[])
+    
+  const onDeleteClickHandler = (id) => {
+      dispatch(deleteCards(id,token))  
   }
 
-  const onDragEnd = (result) => {
-   const {destination, source,draggableId} = result
-   if (!destination) return;
-   if (destination.droppableId=== source.droppableId &&
-    destination.index===source.index)  return;
-    dispatch(updateCardSuccess(draggableId,source,destination)) 
-    dispatch(update(draggableId,destination,token))
-    
-    
+  const onDragEnd = React.useCallback((result) => {
+    const {destination, source,draggableId} = result
+    if (!destination) return;
+    if (destination.droppableId=== source.droppableId &&
+      destination.index===source.index)  return;
+      dispatch(updateCardSuccess(draggableId,source,destination)) 
+      dispatch(update(draggableId,destination,token))
+  },[token,dispatch])
 
-}
-
-React.useEffect(()=>{
-  if (token)
-  dispatch(getCards(token))
-},[token])
+  React.useEffect(()=>{
+    if (token)
+      dispatch(getCards(token))
+  },[token])
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-    <div className="app">
-      <div className="container">
-        <div className="app__inner">
-          {columns.map((id, index)=> {
-           
-            
-            return (
-              <Column key={columnHeader[id].title}
-                      id={id}
-                      title={columnHeader[id].title}
-                      color={columnHeader[id].color}
-                      tasks={columnHeader[id].task}
-                      onAddClickl={onAddClickHandler}
-                      onDeleteTask={onDeleteClickHandler}/>
-            )
-          })}
-         
-  
-        </div>
-      </div>
-  
-    </div>
+
+          <div className="board">
+            {columns.length!==0 && columns.map((id, index)=> {
+              return (
+                <Column key={columnHeader[id].title}
+                        id={id}
+                        count={columnHeader[id].task.length}
+                        title={columnHeader[id].title}
+                        color={columnHeader[id].color}
+                        tasks={columnHeader[id].task}
+                        onAddClickl={onAddClickHandler}
+                        onDeleteTask={onDeleteClickHandler}
+                        />
+              )
+            })}
+          </div>
+        
+
     </DragDropContext>
   );
 }
 
-export default Board;
+export default React.memo(Board);

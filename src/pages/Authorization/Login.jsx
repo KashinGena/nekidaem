@@ -1,25 +1,27 @@
 import React from 'react'
 import './Authorization.scss'
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import {auth} from '../../redux/actions/auth'
 import { NavLink } from 'react-router-dom'
 
 
+
 const Login = () => {
-    
-    
- 
     const [name,setName] = React.useState('')
     const [password,setPassword] = React.useState('')
+    const [tryToAuth,setTryToAuth]= React.useState(false)
+    const error = useSelector( state => state.authReducer.error)
     const dispatch = useDispatch()
     
+
     const onLoginHandler = (e) => {
         e.preventDefault();
         const payload = {
             'username': name,
             'password': password
         } 
-        dispatch(auth(payload))
+        dispatch(auth(payload,true))
+        setTryToAuth(true)
     }
 
     return (
@@ -28,18 +30,30 @@ const Login = () => {
             <form action="" className="auth__form">
                 <input
                     className='auth__input'
-                    type='text' placeholder='name'
+                    type='text' placeholder='name (required)'
                     value={name}
-                    onChange= {(event) =>setName(event.target.value)}
+                    onChange= {(event) =>{
+                        setName(event.target.value)
+                        setTryToAuth(false)
+                    }}
                     required
                 />
+                {error && error.username && tryToAuth && 
+                    <div className="auth__error">{error.username[0]}</div>
+                }
                 <input
                     className='auth__input'
-                    type='text' placeholder='password'
+                    type='text' placeholder='password (required)'
                     value={password}
-                    onChange= {(event) =>setPassword(event.target.value)}
+                    onChange= {(event) => {
+                        setPassword(event.target.value)
+                        setTryToAuth(false)
+                    }}
                     required
                 />
+                {error && error.password  && tryToAuth && 
+                    <div className="auth__error">{error.password[0]}</div>
+                }
                 
                 <button className="auth__login-btn"
                         onClick={onLoginHandler}
@@ -47,7 +61,7 @@ const Login = () => {
                     Войти
                 </button>
             </form>
-            <div>Нет аккаунта? <NavLink to='/register'>Зарегистрируйтесь</NavLink></div>
+            <div className="auth__reminder">Нет аккаунта? <NavLink to='/register'>Зарегистрируйтесь</NavLink></div>
         </div>
     )
 }

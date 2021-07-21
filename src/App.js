@@ -24,24 +24,24 @@ React.useEffect(() => {
 const onLogoutHandler = () => {
   dispatch(logout())
 }
-  
+
   return (
     <div className="app">
-
-      <Header isAuth={isAuth} userName={userName} onLogout={onLogoutHandler}/>
-      <Switch>
-      <Route path ='/login'>
-          {isAuth? <Redirect to='/'/> :<Login/>}
-        </Route>
-        <Route exact path = "/">
-        {!isAuth? <Redirect to='/register'/> :<Board/>}
-        </Route>
+      <div className='container'>
+        <Header isAuth={isAuth} userName={userName} onLogout={onLogoutHandler}/>
+        <Switch>
+          <Route exact path = "/">
+            {isAuth? <Board/> : null}
+          </Route> 
+          {!isAuth && <Route exact path ='/login' render = {() =><Login/>}/>}
+          {!isAuth && <Route exact path ='/register' render = {() =><Registration/>}/>}
+              
+   
       
-        <Route path ='/register'>
-          {isAuth? <Redirect to='/'/> :<Registration/>}
-        </Route>
-        <Redirect to ='/'/>
-      </Switch>
+          <Redirect to ='/register'/>
+        </Switch>
+      </div>
+
     </div>
   );
 }

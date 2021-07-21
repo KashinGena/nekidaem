@@ -2,13 +2,13 @@ import React from 'react'
 import './Authorization.scss'
 import {useDispatch} from 'react-redux'
 import {auth} from '../../redux/actions/auth'
-import { NavLink} from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
 
 const Registration = (props) => {
-    console.log(props.history);
+   const {history} =props
     
     
     const [name,setName] = React.useState('')
@@ -16,8 +16,9 @@ const Registration = (props) => {
     const [password,setPassword] = React.useState('')
     const [tryToAuth,setTryToAuth]= React.useState(false)
     const error = useSelector( state => state.authReducer.error)
-    
+    const isAuth = useSelector( state => state.authReducer.isAuth)
     const dispatch = useDispatch()
+    console.log(props);
     
     
     const onLoginHandler = (e) => {
@@ -27,8 +28,12 @@ const Registration = (props) => {
             'email':email,
             'password': password
         } 
+       
         dispatch(auth(payload,false)) 
         setTryToAuth(true) 
+        if (isAuth) history.replace('/board')
+        
+       
     }
 
     return (

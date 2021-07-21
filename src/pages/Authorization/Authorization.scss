@@ -13,6 +13,7 @@
     }
     &__form {
         background-color: darken( #33363d,5);
+        width: 50vw;
         display: flex;
         flex-direction: column;
         padding: 30px;
@@ -33,7 +34,9 @@
     &__error {
         margin-top: -26px;
         margin-bottom: 10px;
+        width: 100%;
         color:#fff;
+        overflow-wrap: break-word;
     }
 
     @media (max-width:768px) {

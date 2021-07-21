@@ -2,7 +2,7 @@ import React from 'react'
 import './styles/App.scss';
 import Registration from './pages/Authorization/Registration';
 import Header from './components/Header/Header';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Board from './pages/Board/Board';
 import {useSelector, useDispatch} from 'react-redux'
 import Login from './pages/Authorization/Login';
@@ -19,7 +19,7 @@ function App() {
 React.useEffect(() => {
   if (!isAuth)
     dispatch(autoAuth())
-},[])
+},[isAuth])
 
 const onLogoutHandler = () => {
   dispatch(logout())
@@ -29,17 +29,22 @@ const onLogoutHandler = () => {
     <div className="app">
       <div className='container'>
         <Header isAuth={isAuth} userName={userName} onLogout={onLogoutHandler}/>
-        <Switch>
-          <Route exact path = "/">
-            {isAuth? <Board/> : null}
-          </Route> 
-          {!isAuth && <Route exact path ='/login' render = {() =><Login/>}/>}
-          {!isAuth && <Route exact path ='/register' render = {() =><Registration/>}/>}
-              
-   
-      
-          <Redirect to ='/register'/>
-        </Switch>
+        {!isAuth
+          ?
+          <Switch>
+            <Route exact path ='/login'  component =  {Login}/>
+            <Route exact path ='/register' component = {Registration}/>
+          </Switch>
+          :
+          <Switch>
+              <Route exact path ='/board' render = {() =><Board/>}/>
+          </Switch>
+            
+        }
+        
+ 
+          
+     
       </div>
 
     </div>

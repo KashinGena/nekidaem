@@ -15,7 +15,7 @@ const Header = ({isAuth,userName,onLogout}) => {
                 </div>
             </NavLink>
             
-            {isAuth &&
+            {isAuth ?
                 <div className='header__login-container'>
                     <span className="header__login-user">{userName}</span>
                     <button className='header__login-auth'
@@ -23,6 +23,16 @@ const Header = ({isAuth,userName,onLogout}) => {
                     >
                         Выйти
                     </button>
+                </div>
+                :
+                <div className='header__login-container'>
+                    <NavLink to='/register'>
+                        <button className='header__login-auth'
+                                onClick={onLogout}
+                        >
+                            Авторизация
+                        </button>
+                    </NavLink>
                 </div>
             }
         </header>

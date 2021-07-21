@@ -3,10 +3,12 @@ import './Task.scss'
 import { Draggable } from 'react-beautiful-dnd'
 
 const Task = ({id, text,index, onDelete,...props}) => {
-    console.log();
+    console.log('id',id,'index',index);
     
     return (
-        <Draggable key={id} draggableId={id.toString()} index={index}>
+        <Draggable draggableId={id.toString()} index={index}>
+            
+            
             {(provided)=>(
                 <div 
                     {...provided.draggableProps}

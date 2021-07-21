@@ -1,6 +1,12 @@
 
 import axios from "axios";
 
+export const logout = () => {
+    localStorage.clear()
+    return {
+        type:'LOGOUT'
+    }
+}
 
 export const authSuccess = (token, username) => {
     return {
@@ -10,11 +16,11 @@ export const authSuccess = (token, username) => {
     }
 }
 
-export const autoAuthSuccess = (token, username) => {
+export const autoAuthSuccess = (token, userName) => {
     return {
         type:'AUTO_AUTH_SUCCESS',
         token,
-        username
+        userName
     }
 }
 
@@ -75,7 +81,9 @@ export const autoAuth = () => {
             if (response.status===200) {
                
                 const data = response.data
-                dispatch(autoAuthSuccess(data))
+                console.log(data);
+                const userName=localStorage.getItem('username')
+                dispatch(autoAuthSuccess(data,userName))
               
             } 
             else {

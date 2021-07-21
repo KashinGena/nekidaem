@@ -31,12 +31,13 @@ const authReducer = (state = initialState, action) => {
                 userName:''
             }
         case 'AUTO_AUTH_SUCCESS':
+            console.log(action);
             return {
                 ...state,
                 isAuth:true,
                 token:action.token,
                 userName:action.userName,
-                password:action.password
+               
             }
 
 

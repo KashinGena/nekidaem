@@ -4,9 +4,9 @@ import './Header.scss'
 import { NavLink } from 'react-router-dom'
 
 
-const Header = ({isAuth,username}) => {
+const Header = ({isAuth,userName,onLogout}) => {
     return (
-        <header>
+        <header className='header'>
             <NavLink to='/'>
                 <div className="header__logo">
                     <img className="header__logo-img" alt ='logo' src ={logo}/>
@@ -16,12 +16,18 @@ const Header = ({isAuth,username}) => {
             
             {isAuth
                 ?
-                <div>
-                    <span>{username}</span>
-                    <button>Выйти</button>
+                <div className='header__login-container'>
+                    <span className="header__login-user">{userName}</span>
+                    <button className='header__login-auth'
+                            onClick={onLogout}
+                    >
+                        Выйти
+                    </button>
                 </div>
                 :
-                null
+                <NavLink to ='/register'>
+                    <button className='header__login-auth'>Авторизация</button>
+                </NavLink>
             }
         </header>
     )

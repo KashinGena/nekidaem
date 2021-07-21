@@ -37,7 +37,7 @@ const Column = ({id,color, title, tasks, onAddClickl,onDeleteTask}) => {
                     {...provided.droppableProps}
                     >
                         {tasks.length!==0 && tasks.map((id,index) => {
-                          return (cards[id])? <Task key={id} index={cards[id].seq_num} id={id} text={cards[id].text} onDelete={onDeleteTask.bind(null,id)}/>
+                          return (cards[id])? <Task key={id} index={index} id={id} text={cards[id].text} onDelete={onDeleteTask.bind(null,id)}/>
                           :null
 })}
                         {provided.placeholder}

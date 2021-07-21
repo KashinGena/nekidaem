@@ -1,7 +1,7 @@
 import React from 'react'
 import Column from '../../components/Column/Column'
 import {useDispatch, useSelector} from 'react-redux'
-import {createCard, getCards, deleteCards, update} from '../../redux/actions/cards'
+import {createCard, getCards, deleteCards, update, updateCardSuccess} from '../../redux/actions/cards'
 import { DragDropContext } from 'react-beautiful-dnd'
 
 
@@ -28,15 +28,11 @@ const Board = () => {
   }
 
   const onDragEnd = (result) => {
-    console.log(result);
    const {destination, source,draggableId} = result
    if (!destination) return;
    if (destination.droppableId=== source.droppableId &&
     destination.index===source.index)  return;
-    //const column = columnHeader[source.droppableId]
-    
-    console.log(result);
-   
+    dispatch(updateCardSuccess(draggableId,source,destination)) 
     dispatch(update(draggableId,destination,token))
     
     

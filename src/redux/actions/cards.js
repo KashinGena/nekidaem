@@ -49,7 +49,10 @@ export const update  = (id,destination,token) => {
     const config = {
         headers: { Authorization: `JWT ${token.token}` }
     };
-    return async (dispatch,getState) => {
+    console.log(config);
+    
+    return  (dispatch,getState) => {
+        
          const card =getState().cardsReducer.cards[id]
       
         
@@ -60,13 +63,13 @@ export const update  = (id,destination,token) => {
         }
         
         try {
-            dispatch(updateCardSuccess(id,destination))
-            await axios.patch(`https://trello.backend.tests.nekidaem.ru/api/v1/cards/${id}/`,reqObj,config)
-            
+               
+             axios.patch(`https://trello.backend.tests.nekidaem.ru/api/v1/cards/${id}/`,reqObj,config)
             
         }
         catch(e) {
-
+            console.log(e);
+            
         }
     }
 }
@@ -74,12 +77,13 @@ export const update  = (id,destination,token) => {
 
 
 
- const updateCardSuccess = (id,destination) => {
+ export const updateCardSuccess = (id,source,destination) => {
      console.log('upd');
      
     return {
         type:'UPDATE_CARD',
         id,
+        source,
         destination
     }
 }

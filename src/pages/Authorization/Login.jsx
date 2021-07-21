@@ -2,15 +2,17 @@ import React from 'react'
 import './Authorization.scss'
 import {useDispatch,useSelector} from 'react-redux'
 import {auth} from '../../redux/actions/auth'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 
 
 
-const Login = () => {
+const Login = ({history,...rest}) => {
     const [name,setName] = React.useState('')
     const [password,setPassword] = React.useState('')
     const [tryToAuth,setTryToAuth]= React.useState(false)
     const error = useSelector( state => state.authReducer.error)
+    const isAuth = useSelector( state => state.authReducer.isAuth)
+
     const dispatch = useDispatch()
     
 
@@ -22,8 +24,9 @@ const Login = () => {
         } 
         dispatch(auth(payload,true))
         setTryToAuth(true)
+       if (isAuth) history.replace('/board')
     }
-
+  
     return (
         <div className="auth">
             <h1 className="auth__title">Авторизация</h1>

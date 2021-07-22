@@ -31,11 +31,11 @@ const Registration = (props) => {
        
         dispatch(auth(payload,false)) 
         setTryToAuth(true) 
-        if (isAuth) history.replace('/board')
+        
         
        
     }
-
+    if (isAuth) return (<Redirect to='/board'/>)
     return (
      
         <div className="auth">

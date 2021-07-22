@@ -1,13 +1,22 @@
 import axios from "axios"
 
-export const getCards = (token) => {
-    const config = {
-        headers: { Authorization: `JWT ${token.token}` }
-    };  
-    return async dispatch => {
+export const getCards = () => {
+
+    return async (dispatch,getState) => {
+        const token = getState().authReducer.token
+        const expData = new Date(JSON.parse(localStorage.getItem('expData')))
+        const config = {
+            headers: { Authorization: `JWT ${token}` }
+        };
+        if (expData>new Date().getTime())
+            dispatch(getCardsSuccess())
         try {
+            console.log(config);
+            
             const response = await axios.get('https://trello.backend.tests.nekidaem.ru/api/v1/cards/',config)
             const data= response.data
+            console.log(data);
+            
             dispatch(getCardsSuccess(data))
         }
         catch(e) {
@@ -16,13 +25,13 @@ export const getCards = (token) => {
     }      
 }
 
-export const createCard = (card, token) => {
-    const config = {
-        headers: { Authorization: `JWT ${token.token}` }
-    };
+export const createCard = (card) => {
 
-    
-    return async dispatch => {
+    return async (dispatch,getState) => {
+        const token = getState().authReducer.token
+        const config = {
+            headers: { Authorization: `JWT ${token}` }
+        };
         try {
             const response = await axios.post('https://trello.backend.tests.nekidaem.ru/api/v1/cards/',card,config)
             const data= response.data
@@ -42,13 +51,17 @@ const cardCreated = (card) => {
         payload:card
     }
 }
-export const update  = (id,destination,token) => {
-    const config = {
-        headers: { Authorization: `JWT ${token.token}` }
-    };
+
+
+export const update  = (id,destination) => {
 
     return  (dispatch,getState) => {
+        const token = getState().authReducer.token
+        console.log(token);
         
+        const config = {
+            headers: { Authorization: `JWT ${token}` }
+        };
          const card =getState().cardsReducer.cards[id]
       
         
@@ -75,7 +88,6 @@ export const update  = (id,destination,token) => {
 
  export const updateCardSuccess = (id,source,destination) => {
  
-     
     return {
         type:'UPDATE_CARD',
         id,
@@ -99,11 +111,15 @@ const cardDeleted = (id) => {
 }
 
 
-export const deleteCards = (id,token) => {
-    const config = {
-        headers: { Authorization: `JWT ${token.token}` }
-    };  
-    return async dispatch => {
+export const deleteCards = (id) => {
+  
+    return async (dispatch,getState) => {
+        const token = getState().authReducer.token
+        console.log(token);
+        
+        const config = {
+            headers: { Authorization: `JWT ${token}` }
+        };
         try {
              await axios.delete(`https://trello.backend.tests.nekidaem.ru/api/v1/cards/${id}/`,config)
              dispatch(cardDeleted(id))

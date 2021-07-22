@@ -13,14 +13,29 @@ const initialState = {
 const cardsReducer = (state = initialState, action) => {
     switch (action.type) {
         case('GET_CARDS_SUCCESS'): {
+            if(!action.payload) {
+                return {
+                    ...state
+                }
+            }
                 const res = [...action.payload];
+                console.log(res);
+                
                 const arr = [...state.columns]
                 const columnHeader={...state.columnHeader}
+                console.log(columnHeader);
+                console.log(state.cards);
+                
+                
                 arr.map((id,index) => 
-                    columnHeader[id].task=[...columnHeader[id].task,...res.filter(item => +item.row===index).map(item => item.id)]
+                    columnHeader[id].task=[...res.filter(item => +item.row===index).map(item => item.id)]
                 )
             const object = res.reduce(
                     (obj, item) => Object.assign(obj, { [item.id]: item}), {});
+                    console.log(object);
+                    console.log(columnHeader);
+                    
+                    
             return {
                 ...state,
                 cards:object,

@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import Board from './pages/Board/Board';
 import {useSelector, useDispatch} from 'react-redux'
 import Login from './pages/Authorization/Login';
-import { autoAuth,logout } from './redux/actions/auth';
+import { autoAuthSuccess,logout, autoAuth } from './redux/actions/auth';
 
 
  
@@ -17,9 +17,17 @@ function App() {
   const dispatch = useDispatch()
   
 React.useEffect(() => {
-  if (!isAuth)
+  console.log(localStorage);
+  
+  const token = localStorage.getItem('token')
+  const username = localStorage.getItem('username')
+  console.log(token);
+  
+  if (token)
+    dispatch(autoAuthSuccess(token,username))
+    else
     dispatch(autoAuth())
-},[isAuth])
+},[])
 
 const onLogoutHandler = () => {
   dispatch(logout())
@@ -29,15 +37,13 @@ const onLogoutHandler = () => {
     <div className="app">
       <div className='container'>
         <Header isAuth={isAuth} userName={userName} onLogout={onLogoutHandler}/>
-        {!isAuth
-          ?
+       
+          
           <Switch>
             <Route exact path ='/login'  component =  {Login}/>
             <Route exact path ='/register' component = {Registration}/>
-          </Switch>
-          :
-          <Switch>
-              <Route exact path ='/board' render = {() =><Board/>}/>
+         
+              {isAuth && <Route exact path ='/board' render = {() =><Board/>}/>}
           </Switch>
             
         }

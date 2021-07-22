@@ -48,20 +48,27 @@ export const auth = (authObj,isLogin) => {
         'https://trello.backend.tests.nekidaem.ru/api/v1/users/login/'
         :
         'https://trello.backend.tests.nekidaem.ru/api/v1/users/create/'
-
-    const requestObj = (isLogin)? {...authObj.username,...authObj.password}:authObj
-
+    const {username,password}=authObj
+    const requestObj = (isLogin)? {username,password}:authObj
+    console.log(requestObj);
+    
     return async (dispatch) => { 
         try {
             const response = await axios.post(url,requestObj)
-            if (response.status===201) {
+            console.log(response);
+            
+            if (response.status===201 || response.status===200) {
   
                 const data = response.data
+                console.log(data);
+                
                 const expirationData = new Date().getTime()*60*60*100
                 localStorage.setItem('expData', JSON.stringify(expirationData))
-                localStorage.setItem('token', authObj.token)
-                localStorage.setItem('username', authObj.username)
-                localStorage.setItem('password', authObj.password)
+                console.log(data.token);
+                
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('username', data.username)
+                localStorage.setItem('password', data.password)
                 dispatch(authSuccess(data.token,data.username))
                 dispatch(refreshToken(3600))
               
@@ -82,16 +89,20 @@ export const autoAuth = () => {
 
     const userName= localStorage.getItem('username')
     const password = localStorage.getItem('password')
+    const token = localStorage.getItem('token')
+    const expData = new Date(JSON.parse(localStorage.getItem('expData')))
+   
     const requestObj = (userName && password) && {'username':userName,'password':password}
     return async (dispatch) => { 
+        if (expData>new Date().getTime())
+            dispatch(autoAuthSuccess(token,userName))
         try {
             const response =(requestObj)? await axios.post(url,requestObj):null
             if (response.status===200) {
                
                 const data = response.data
                 const userName=localStorage.getItem('username')
-                dispatch(autoAuthSuccess(data,userName))
-              
+                dispatch(autoAuthSuccess(data.token,userName))
             } 
             else {
                 dispatch(logout())   

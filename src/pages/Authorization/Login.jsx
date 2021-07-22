@@ -24,9 +24,9 @@ const Login = ({history,...rest}) => {
         } 
         dispatch(auth(payload,true))
         setTryToAuth(true)
-       if (isAuth) history.replace('/board')
+      
     }
-  
+    if (isAuth) return (<Redirect to='/board'/>)
     return (
         <div className="auth">
             <h1 className="auth__title">Авторизация</h1>

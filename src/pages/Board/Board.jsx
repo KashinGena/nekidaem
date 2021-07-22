@@ -37,7 +37,7 @@ const Board = () => {
 
   React.useEffect(()=>{
     if (token)
-      dispatch(getCards(token))
+      dispatch(getCards())
   },[token])
 
   return (
@@ -45,7 +45,10 @@ const Board = () => {
 
           <div className="board">
             {columns.length!==0 && columns.map((id, index)=> {
+              console.log(columnHeader[id]);
               return (
+                
+                
                 <Column key={columnHeader[id].title}
                         id={id}
                         count={columnHeader[id].task.length}

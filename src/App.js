@@ -2,7 +2,7 @@ import React from 'react'
 import './styles/App.scss';
 import Registration from './pages/Authorization/Registration';
 import Header from './components/Header/Header';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Board from './pages/Board/Board';
 import {useSelector, useDispatch} from 'react-redux'
 import Login from './pages/Authorization/Login';
@@ -36,25 +36,18 @@ const onLogoutHandler = () => {
   return (
     <div className="app">
       <div className='container'>
-        <Header isAuth={isAuth} userName={userName} onLogout={onLogoutHandler}/>
-       
-          
+        <Header isAuth={isAuth} userName={userName} onLogout={onLogoutHandler}/>     
           <Switch>
+            <Route exact path ='/'>
+              {isAuth? <Redirect to='/board'/> : <Redirect to='/register'/>}
+            </Route>
             <Route exact path ='/login'  component =  {Login}/>
             <Route exact path ='/register' component = {Registration}/>
-         
-              {isAuth && <Route exact path ='/board' render = {() =><Board/>}/>}
-          </Switch>
-            
-        }
-        
- 
-          
-     
+            {isAuth && <Route exact path ='/board' render = {() =><Board/>}/>}
+          </Switch>   
       </div>
-
     </div>
-  );
-}
+  )
+  }
 
 export default App;

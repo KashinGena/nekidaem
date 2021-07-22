@@ -8,7 +8,7 @@ const Header = ({isAuth,userName,onLogout}) => {
 
     return (
         <header className='header'>
-            <NavLink to='/board'>
+            <NavLink to='/'>
                 <div className="header__logo">
                     <img className="header__logo-img" alt ='logo' src ={logo}/>
                     <h1 className="header__logo-title">FakeTrello</h1>

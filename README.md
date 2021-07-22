@@ -3,11 +3,15 @@
 
 Сделать аналог Trello
 
+[Деплой на GH Pages](https://kashingena.github.io/nekidaem/#/)
+
+
 ### Используемые технологии:
 - React
 - Redux
 - Scss
 - React-beautiful-dnd
+- Axios
 
 
 

@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/nekidaem/static/css/main.89cb29f5.chunk.css",
-    "main.js": "/nekidaem/static/js/main.7c17e17c.chunk.js",
-    "main.js.map": "/nekidaem/static/js/main.7c17e17c.chunk.js.map",
+    "main.css": "/nekidaem/static/css/main.c9f739e5.chunk.css",
+    "main.js": "/nekidaem/static/js/main.0babb3ad.chunk.js",
+    "main.js.map": "/nekidaem/static/js/main.0babb3ad.chunk.js.map",
     "runtime-main.js": "/nekidaem/static/js/runtime-main.b16d9da5.js",
     "runtime-main.js.map": "/nekidaem/static/js/runtime-main.b16d9da5.js.map",
     "static/js/2.343b8aad.chunk.js": "/nekidaem/static/js/2.343b8aad.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.e63ddb1f.chunk.js": "/nekidaem/static/js/3.e63ddb1f.chunk.js",
     "static/js/3.e63ddb1f.chunk.js.map": "/nekidaem/static/js/3.e63ddb1f.chunk.js.map",
     "index.html": "/nekidaem/index.html",
-    "static/css/main.89cb29f5.chunk.css.map": "/nekidaem/static/css/main.89cb29f5.chunk.css.map",
+    "static/css/main.c9f739e5.chunk.css.map": "/nekidaem/static/css/main.c9f739e5.chunk.css.map",
     "static/js/2.343b8aad.chunk.js.LICENSE.txt": "/nekidaem/static/js/2.343b8aad.chunk.js.LICENSE.txt",
     "static/media/trello.0d980286.png": "/nekidaem/static/media/trello.0d980286.png"
   },
   "entrypoints": [
     "static/js/runtime-main.b16d9da5.js",
     "static/js/2.343b8aad.chunk.js",
-    "static/css/main.89cb29f5.chunk.css",
-    "static/js/main.7c17e17c.chunk.js"
+    "static/css/main.c9f739e5.chunk.css",
+    "static/js/main.0babb3ad.chunk.js"
   ]
 }

@@ -55,6 +55,6 @@ const onLogoutHandler = () => {
 
     </div>
   );
-}
+
 
 export default App;

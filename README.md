@@ -2,13 +2,16 @@
 [Ссылка на задание](https://docs.google.com/document/d/1bPt_u2boQHeQSxjT3onPvn6OQdwDI3VKTqjImRK9dzM/edit)
 
 Сделать аналог Trello
-[Деплой на GH Pages] (https://kashingena.github.io/nekidaem/#/)
+
+[Деплой на GH Pages](https://kashingena.github.io/nekidaem/#/)
+
 
 ### Используемые технологии:
 - React
 - Redux
 - Scss
 - React-beautiful-dnd
+- Axios
 
 
 
